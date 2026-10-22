@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "data": {
+    "urls": 235370,
+    "shared_hosting_urls": 26790,
+    "ip_urls": 606,
+    "mixed_label_domains": 105,
+    "domains": 174689,
+    "phishing_domains": 42717
+  },
+  "train_domains": 131016,
+  "test_domains": 43673,
+  "roc_auc": 0.8311889323982058,
+  "average_precision": 0.7119855468797326,
+  "pattern_only_roc_auc": 0.7708339800754223,
+  "at_0.5": {
+    "precision": 0.8141058803241938,
+    "recall": 0.44208259200299654,
+    "accuracy": 0.8388935955853731,
+    "confusion": {
+      "tn": 31916,
+      "fp": 1078,
+      "fn": 5958,
+      "tp": 4721
+    }
+  },
+  "bands": {
+    "low": {
+      "domains": 33403,
+      "share": 0.7648432670070753,
+      "phishing_rate": 0.12789270424812144
+    },
+    "uncertain": {
+      "domains": 6159,
+      "share": 0.14102534746868775,
+      "phishing_rate": 0.4292904692320182
+    },
+    "high": {
+      "domains": 4111,
+      "share": 0.09413138552423694,
+      "phishing_rate": 0.9153490634882023
+    }
+  },
+  "errors": {
+    "false_positives": {
+      "count": 1078,
+      "mean_shap": {
+        "name_pattern": 1.3861,
+        "suffix": 0.5076,
+        "suffix_levels": 0.0792,
+        "vowel_ratio": 0.0421,
+        "entropy": 0.0298,
+        "digit_ratio": 0.0203,
+        "length": 0.0202,
+        "consonant_run": 0.0195,
+        "digits": 0.0171,
+        "unique_ratio": 0.0099,
+        "hyphens": 0.0062,
+        "action_words": 0.0058,
+        "brand_inside": 0.0024,
+        "brand_exact": 0.0,
+        "punycode": 0.0
+      }
+    },
+    "false_negatives": {
+      "count": 5958,
+      "mean_shap": {
+        "suffix": 0.0731,
+        "name_pattern": -0.0503,
+        "suffix_levels": 0.0336,
+        "consonant_run": -0.0073,
+        "digits": -0.0068,
+        "entropy": 0.0031,
+        "length": 0.0023,
+        "unique_ratio": -0.002,
+        "brand_inside": -0.0018,
+        "digit_ratio": -0.0018,
+        "hyphens": -0.0017,
+        "action_words": -0.001,
+        "vowel_ratio": 0.0,
+        "brand_exact": 0.0,
+        "punycode": 0.0
+      }
+    }
+  }
+}

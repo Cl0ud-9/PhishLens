@@ -1,0 +1,14 @@
+PhishLens does not bundle third-party code. The material below is used by the project and keeps its own license.
+
+PhiUSIIL Phishing URL Dataset, UCI Machine Learning Repository,
+https://archive.ics.uci.edu/dataset/967/phiusiil+phishing+url+dataset, licensed under CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/). Introduced in A. Prasad and S. Chandra, "PhiUSIIL: A diverse security
+profile empowered phishing URL detection framework based on similarity index and incremental learning", Computers &
+Security 136 (2024) 103545, https://doi.org/10.1016/j.cose.2023.103545. The model in models/ was trained on domains
+derived from it. The dataset itself is not included; train.py downloads it.
+
+Public Suffix List, maintained by Mozilla, https://publicsuffix.org, licensed under the Mozilla Public License 2.0. A
+copy is bundled with tldextract and used to find registered domains.
+
+Python packages, installed from PyPI by requirements.txt: LightGBM (MIT), scikit-learn, NumPy, pandas, SciPy and
+tldextract (BSD 3-Clause), Streamlit (Apache License 2.0), and, for the training charts, Matplotlib (Matplotlib license).

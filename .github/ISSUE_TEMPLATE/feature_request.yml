@@ -1,0 +1,21 @@
+name: Idea or feature request
+description: Suggest a model, a dataset or an improvement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ideas are welcome. Please open one before writing code for a large change, so the approach can be agreed first
+        (see [CONTRIBUTING](https://github.com/Cl0ud-9/PhishLens/blob/main/CONTRIBUTING.md)).
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like the project to do?
+    validations:
+      required: true

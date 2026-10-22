@@ -1,0 +1,38 @@
+name: Bug report
+description: Something does not run, or a whole kind of link is judged wrongly
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. The **Honest limits** section of the
+        [README](https://github.com/Cl0ud-9/PhishLens#honest-limits) explains what PhishLens can and cannot tell
+        from a domain name, so a single link judged wrongly is expected, not a bug.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where does it go wrong?
+      options:
+        - The app
+        - predict.py
+        - train.py
+        - Installing
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: For a wrong verdict, the links (with any private parts removed) and the output of predict.py.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: The error or the output
+      render: text
+  - type: input
+    id: env
+    attributes:
+      label: Operating system and Python version
+      placeholder: Windows 11, Python 3.12.7
