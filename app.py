@@ -5,11 +5,13 @@ import streamlit as st
 
 from phishlens import PhishLens, check
 
-LEVEL_STYLE = {"high": st.error, "ip": st.error, "uncertain": st.warning, "low": st.success, "official": st.success}
+LEVEL_STYLE = {"high": st.error, "lookalike": st.error, "ip": st.error, "uncertain": st.warning, "low": st.success,
+               "official": st.success}
 EXAMPLES = {"Brand + login words": "https://paypal-secure-login-verify.com/signin",
             "Fake Google address": "https://accounts.google.com.verify-session.top/login",
             "A genuine site": "https://www.viit.ac.in",
-            "Look-alike letters": "https://pаypal.com"}
+            "Look-alike letters": "https://pаypal.com",
+            "Typosquat": "https://paypa1.com/signin"}
 SHORT = {"length": "name length", "digits": "digits", "digit_ratio": "share of digits", "hyphens": "hyphens",
          "vowel_ratio": "share of vowels", "consonant_run": "consonant run", "entropy": "character variety",
          "unique_ratio": "distinct characters", "brand_exact": "is a brand", "brand_inside": "borrows a brand",

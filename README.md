@@ -46,6 +46,11 @@ streamlit run app.py
 Or from the command line, for one link or many:
 
 ```text
+$ python predict.py paypa1.com
+paypa1.com
+  High risk: made to be read as paypal.com, PayPal's own domain ("paypa1" reads as "paypal") (64%)
+  ...
+
 $ python predict.py https://paypal-secure-login-verify.com/signin
 https://paypal-secure-login-verify.com/signin
   High risk: this domain looks like the ones phishers register (100%)
@@ -98,8 +103,21 @@ link ──> registered domain ──> name features ─┐
    phishing names. During training, each domain's score comes from a model that did not see that domain.
 4. **LightGBM** combines them into a probability, and its built-in TreeSHAP gives each feature's exact SHAP value.
 5. **Before the model:** official domains of commonly imitated brands (`google.com`, `onlinesbi.sbi`, ...) are
-   recognised from a [short list](phishlens/official.py), and bare IP addresses are flagged. The results below do not
-   use the list.
+   recognised from a [short list](phishlens/official.py), bare IP addresses are flagged, and look-alikes of those
+   brands are caught (below). The results below use neither the list nor the look-alike check.
+
+**Look-alike names.** `paypa1.com` reads as "paypal" at a glance, but to the model it is just an ordinary short name:
+on its own it gives it 64%, "uncertain". [lookalike.py](phishlens/lookalike.py) compares each name with the official
+brands' names:
+
+| The name | Example | Verdict |
+|---|---|---|
+| Reads as a brand once look-alike characters are read as letters (`0` as o, `1` as l, `rn` as m, `vv` as w, ...) | `g00gle.com`, `paypa1.com`, `rnicrosoft.net` | High risk, saying which domain it imitates |
+| One letter added, removed, changed or swapped | `paypai.com`, `payapl.com` | At least uncertain, with a warning to check the spelling |
+| The brand's exact name on another ending | `amazon.de` | A note only: brands often own these |
+
+Brand names shorter than five letters are not compared, since `dhl` is one letter away from countless real names.
+The model's own reasons are still shown underneath.
 
 **Shared hosting.** Sites on platforms where anyone can publish (`*.web.app`, `*.vercel.app`, `*.workers.dev`, ...) make
 up 26,790 of the dataset's URLs, and 99.6% of them are phishing, because the legitimate URLs are all big sites' own

@@ -5,6 +5,16 @@ What changed in each version of PhishLens.
 The format follows [Keep a Changelog](https://keepachangelog.com), and the versions follow
 [Semantic Versioning](https://semver.org).
 
+## [1.1.0] - 2026-10-22
+
+### Added
+
+- Look-alike names: a domain that reads as a brand's once characters such as `0`, `1` or `rn` are read as the letters
+  they imitate (`g00gle.com`, `paypa1.com`, `rnicrosoft.net`) is high risk, and the verdict says which domain it
+  imitates. One letter away from a brand's name (`paypai.com`) is never called low risk and carries a warning; the
+  brand's exact name on another ending (`amazon.de`) gets a note. The model alone scores `paypa1.com` as uncertain.
+- A typosquat example in the app.
+
 ## [1.0.0] - 2026-10-22
 
 The first version.

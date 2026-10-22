@@ -4,4 +4,4 @@ from .domains import parse
 from .model import PhishLens
 
 __all__ = ["PhishLens", "Verdict", "check", "parse"]
-__version__ = "1.0.0"
+__version__ = "1.1.0"

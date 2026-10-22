@@ -3,6 +3,8 @@ from dataclasses import dataclass, field
 
 from .domains import parse, to_unicode
 from .features import COLUMNS, describe
+from .lookalike import find as find_lookalike
+from .lookalike import read_as_letters
 from .model import SHARED_HOSTING_AS
 from .official import OFFICIAL
 
@@ -22,7 +24,7 @@ class Verdict:
     url: str
     host: str
     domain: str
-    level: str                 # "official", "low", "uncertain", "high" or "ip"
+    level: str                 # "official", "low", "uncertain", "high", "lookalike" or "ip"
     summary: str
     score: float | None = None  # probability of phishing, from the model
     reasons: list = field(default_factory=list)
@@ -58,6 +60,19 @@ def check(url, model, top=6):
     else:
         level, summary = "low", "Low risk: this domain looks like a genuine site's"
     notes = []
+    imitation = find_lookalike(host.name, host.registered_domain)
+    if imitation and imitation.kind == "disguised":
+        level = "lookalike"
+        summary = (f"High risk: made to be read as {imitation.domain}, {imitation.brand}'s own domain "
+                   f'("{host.name}" reads as "{read_as_letters(host.name)}")')
+    elif imitation and imitation.kind == "one_edit":
+        notes.append(f"Warning: {host.name} is one letter away from {imitation.domain}, {imitation.brand}'s own "
+                     "domain. Check the spelling carefully before trusting it.")
+        if level == "low":
+            level, summary = "uncertain", f"Uncertain: one letter away from {imitation.domain}"
+    elif imitation:
+        notes.append(f"{imitation.brand}'s best-known domain is {imitation.domain}. This one uses the same name on "
+                     f"another ending ({host.suffix}), which brands sometimes own and impostors sometimes register.")
     if "xn--" in host.host:
         shown = to_unicode(host.host)
         notes.append(f"Warning: this name uses non-Latin or look-alike letters. It shows as {shown} but is really "
